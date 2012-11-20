@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<banner-configuration>
+  <banner>
+    <eval>
+      <datasetName>banner.eval.dataset.BC2GMDataset</datasetName>
+      <dataset>
+        <sentenceFilename>../banner/src/main/resources/bc2geneMention/train/train.in</sentenceFilename>
+        <mentionTestFilename>../banner/src/main/resources/bc2geneMention/train/GENE.eval</mentionTestFilename>
+        <mentionAlternateFilename>../banner/src/main/resources/bc2geneMention/train/ALTGENE.eval</mentionAlternateFilename>
+      </dataset>
+      <idInputFilename>../banner/src/main/resources/output/ids.txt</idInputFilename>
+      <rawInputFilename>../banner/src/main/resources/output/raw.txt</rawInputFilename>
+      <trainingInputFilename>../banner/src/main/resources/output/training.txt</trainingInputFilename>
+      <outputFilename>../banner/src/main/resources/output/output.txt</outputFilename>
+      <inContextAnalysisFilename>../banner/output/contextAnalysis.html</inContextAnalysisFilename>
+      <mentionFilename>../banner/src/main/resources/output/mention.txt</mentionFilename>
+      <modelFilename>../banner/src/main/resources/output/model_BC2GM.bin</modelFilename>
+      <lemmatiserDataDirectory>../banner/src/main/resources/nlpdata/lemmatiser</lemmatiserDataDirectory>
+      <posTaggerDataDirectory>../banner/src/main/resources/nlpdata/tagger</posTaggerDataDirectory>
+      <posTagger>dragon.nlp.tool.HeppleTagger</posTagger>
+      <tokenizer>banner.tokenization.SimpleTokenizer</tokenizer>
+      <useParenthesisPostProcessing>true</useParenthesisPostProcessing>
+      <useLocalAbbreviationPostProcessing>true</useLocalAbbreviationPostProcessing>
+      <useNumericNormalization>true</useNumericNormalization>
+      <tagFormat>IOB</tagFormat>
+      <crfOrder>2</crfOrder>
+      <mentionTypes>Required</mentionTypes>
+      <sameTypeOverlapOption>Exception</sameTypeOverlapOption>
+      <differentTypeOverlapOption>Exception</differentTypeOverlapOption>
+      <dictionaryTagger>banner.tagging.dictionary.DictionaryTagger</dictionaryTagger>
+    </eval>
+    <tagging>
+      <dictionary>
+        <DictionaryTagger>
+          <filterContainedMentions>true</filterContainedMentions>
+          <normalizeMixedCase>false</normalizeMixedCase>
+          <normalizeDigits>false</normalizeDigits>
+          <canonize>false</canonize>
+          <generate2PartVariations>true</generate2PartVariations>
+          <dropEndParentheticals>false</dropEndParentheticals>
+          <dictionaryFile>../banner/src/main/resources/dict/single.txt</dictionaryFile>
+          <dictionaryType>GENE</dictionaryType>
+        </DictionaryTagger>
+      </dictionary>
+    </tagging>
+  </banner>
+</banner-configuration>

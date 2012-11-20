@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<banner-configuration>
+  <banner>
+    <eval>
+      <datasetName>banner.eval.dataset.AZDCDataset</datasetName>
+      <dataset>
+        <sentenceFilename>../src/main/resources/dict/AZDC_2009_09_10.txt</sentenceFilename>
+        <mentionTestFilename>../src/main/resources/dict/AZDC_2009_09_10.txt</mentionTestFilename>
+      </dataset>
+      <idInputFilename>../banner/src/main/resources/output/ids.txt</idInputFilename>
+      <rawInputFilename>../banner/src/main/resources/output/raw.txt</rawInputFilename>
+      <trainingInputFilename>../banner/src/main/resources/output/training.txt</trainingInputFilename>
+      <outputFilename>../banner/src/main/resources/output/output.txt</outputFilename>
+      <inContextAnalysisFilename>../banner/src/main/resources/output/contextAnalysis.html</inContextAnalysisFilename>
+      <mentionFilename>../banner/src/main/resources/output/mention.txt</mentionFilename>
+      <modelFilename>../banner/src/main/resources/output/model_AZDC.bin</modelFilename>
+      <lemmatiserDataDirectory>../banner/src/main/resources/nlpdata/lemmatiser</lemmatiserDataDirectory>
+      <posTaggerDataDirectory>../banner/src/main/resources/nlpdata/tagger</posTaggerDataDirectory>
+      <posTagger>dragon.nlp.tool.HeppleTagger</posTagger>
+      <tokenizer>banner.tokenization.SimpleTokenizer</tokenizer>
+      <useParenthesisPostProcessing>true</useParenthesisPostProcessing>
+      <useLocalAbbreviationPostProcessing>true</useLocalAbbreviationPostProcessing>
+      <useNumericNormalization>true</useNumericNormalization>
+      <tagFormat>IOB</tagFormat>
+      <crfOrder>2</crfOrder>
+      <textDirection>Forward</textDirection>
+      <mentionTypes>Required</mentionTypes>
+      <sameTypeOverlapOption>Union</sameTypeOverlapOption>
+      <differentTypeOverlapOption>Exception</differentTypeOverlapOption>
+    </eval>
+  </banner>
+</banner-configuration>
