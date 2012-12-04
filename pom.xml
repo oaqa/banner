@@ -14,7 +14,6 @@
 <scm>
 <connection>scm:git:git@github.com:oaqa/banner.git</connection>
 <developerConnection>scm:git:git@github.com:oaqa/banner.git</developerConnection>
-<url>http://mu.lti.cs.cmu.edu:8081/nexus/content/group/course-dependencies</url>
 </scm>
 
  <properties>
