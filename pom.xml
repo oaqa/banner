@@ -2,9 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>edu.asu.banner</groupId>
 	<artifactId>banner</artifactId>
-	<version>0.0.7-SNAPSHOT
-
-	</version>
+	<version>0.0.5-SNAPSHOT</version>
 	<name>banner</name>
 	<description>Banner gene tagging tool</description>
 	<repositories>
@@ -13,16 +11,17 @@
 			<url>http://mu.lti.cs.cmu.edu:8081/nexus/content/repositories/course-dependencies</url>
 		</repository>
 	</repositories>
-	<scm>
+<scm>
 <connection>scm:git:git@github.com:oaqa/banner.git</connection>
 <developerConnection>scm:git:git@github.com:oaqa/banner.git</developerConnection>
+<url>http://mu.lti.cs.cmu.edu:8081/nexus/content/group/course-dependencies</url>
 </scm>
 
  <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 	<build>
-		<sourceDirectory>src</sourceDirectory>
+		
 		<plugins>
 		     <plugin>
         <groupId>org.codehaus.mojo</groupId>
