@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>edu.asu.banner</groupId>
 	<artifactId>banner</artifactId>
-	<version>0.0.7-SNAPSHOT
+	<version>0.0.6-SNAPSHOT
 
 	</version>
 	<name>banner</name>
@@ -41,7 +41,7 @@
           <arguments>
           </arguments>
           <!-- optional -->
-          <workingDirectory>target</workingDirectory>
+          <!-- workingDirectory>target</workingDirectory -->
         </configuration>
       </plugin>
 			<plugin>
@@ -63,7 +63,7 @@
 							<goal>perform</goal>
 						</goals>
 						<configuration>
-						<!--	<pomFileName>banner/pom.xml</pomFileName> -->
+						<pomFileName>banner/pom.xml</pomFileName> 
 						</configuration>
 					</execution>
 				</executions>
