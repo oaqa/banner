@@ -7,6 +7,7 @@
 package banner.tagging.dictionary;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -73,7 +74,7 @@ public class DictionaryTagger implements Tagger
 	public void load(HierarchicalConfiguration config) throws IOException
 	{
 		HierarchicalConfiguration localConfig = config.configurationAt(this.getClass().getName());
-		String dictionaryFilename = localConfig.getString("dictionaryFile");
+		String dictionaryFilename = "/dict/single.txt";
 		if (dictionaryFilename == null)
 			throw new IllegalArgumentException("Must specify dictionary filename");
 		String dictionaryTypeName = localConfig.getString("dictionaryType");
@@ -86,10 +87,10 @@ public class DictionaryTagger implements Tagger
 		EntityType dictionaryType = EntityType.getType(dictionaryTypeName);
 
 		// Load data
-		BufferedReader reader = new BufferedReader(new FileReader(dictionaryFilename));
-		String line = reader.readLine();
-		while (line != null)
-		{
+		 java.util.Scanner s = new java.util.Scanner(getClass().getResourceAsStream(dictionaryFilename)).useDelimiter("\\A");
+		
+		while (s.hasNext())
+		{	String line = s.nextLine();
 			line = line.trim();
 			if (line.length() > 0)
 			{
@@ -104,9 +105,8 @@ public class DictionaryTagger implements Tagger
 					add(split[column], dictionaryType);
 				}
 			}
-			line = reader.readLine();
 		}
-		reader.close();
+		s.close();
 	}
 
 	protected List<String> process(String input)

@@ -1,9 +1,15 @@
 package banner.eval.uima;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import org.apache.commons.configuration.ConfigurationException;
@@ -21,6 +27,7 @@ import banner.types.Sentence;
 import dragon.nlp.tool.Tagger;
 import dragon.nlp.tool.lemmatiser.EngLemmatiser;
 
+
 public class BANNERWrapper {
 
 	Tokenizer tokenizer;
@@ -31,8 +38,9 @@ public class BANNERWrapper {
 	Tagger posTagger;
 	CRFTagger tagger;
 	PostProcessor postProcessor;
-    private final String configPrefix = "config/";
-    private final String modelPrefix = "../banner/src/main/resources/output/";
+	private final String configPrefix = "config/";
+	private final String modelPrefix = "output/";
+
 	public Map<String, String> getAnnotations(String docText) {
 		Map<String, String> annotSpans = new HashMap<String, String>();
 		Scanner sc = new Scanner(docText);
@@ -46,9 +54,8 @@ public class BANNERWrapper {
 				sentence = BANNER.process(tagger, tokenizer, postProcessor,
 						sentence);
 				for (Mention mention : sentence.getMentions()) {
-					annotSpans.put(
-							mention.getText(),
-							mention.getEntityType().getText());
+					annotSpans.put(mention.getText(), mention.getEntityType()
+							.getText());
 					// Gene g = new Gene(jcas, count+mention.getStartChar(),
 					// count+mention.getEndChar());
 					// g.setId("");
@@ -70,37 +77,153 @@ public class BANNERWrapper {
 		}
 		return annotSpans;
 	}
-
-	public void initialize(String configFilePath, String modelFilePath) throws IOException, ConfigurationException {
+	
+	
+	public InputStream getStream(String path){
+	  URL url = getClass().getClassLoader().getResource(path);
+    try {
+      return url.openStream();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+	  return null;
+	}
+	
+	 public String getFile(String path){
+	    URL url = getClass().getClassLoader().getResource(path);
+	    return url.getFile();
+	  }
+	
+	public void initializeModel(String configFile, String modelFile) throws ConfigurationException{
 		long start = System.currentTimeMillis();
-		File configFile = new File(configPrefix +configFilePath);
-		File modelFile = new File(modelPrefix + modelFilePath);
-		//ObjectInputStream ois = new ObjectInputStream(url.openStream());
-        //chunker = (Chunker) ois.readObject();
-        //Streams.closeQuietly(ois);
-				this.config = new XMLConfiguration(configPrefix +configFilePath);
-			
-			// dataset = BANNER.getDataset(config);
-			tokenizer = BANNER.getTokenizer(config);
-			dictionary = BANNER.getDictionary(config);
-			lemmatiser = BANNER.getLemmatiser(config);
-			posTagger = BANNER.getPosTagger(config);
-			postProcessor = BANNER.getPostProcessor(config);
-			HierarchicalConfiguration localConfig = config
-					.configurationAt(BANNER.class.getPackage().getName());
-			String modelFilename = modelPrefix + modelFilePath;
-			System.out.println("Model: " + modelFilename);
-			tagger = CRFTagger.load(new File(modelFilename), lemmatiser,
-					posTagger, dictionary);
-			System.out.println("Loaded model: "
-					+ (System.currentTimeMillis() - start) + "ms");
+		this.config = new XMLConfiguration(getFile(configFile));
 
+		// dataset = BANNER.getDataset(config);
+		tokenizer = BANNER.getTokenizer(config);
+		dictionary = BANNER.getDictionary(config);
+		lemmatiser = BANNER.getLemmatiser(config);
+		posTagger = BANNER.getPosTagger(config);
+		postProcessor = BANNER.getPostProcessor(config);
+		HierarchicalConfiguration localConfig = config
+				.configurationAt(BANNER.class.getPackage().getName());
+		
+		try {
+			System.out.println(modelFile);
+			tagger = CRFTagger.load(getClass().getClassLoader().getResource(modelFile).openStream(), lemmatiser, posTagger,
+					dictionary);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Loaded model: "
+				+ (System.currentTimeMillis() - start) + "ms");
+
+	}
+
+	public void initialize(String configFilePath, String modelFilePath)
+			throws IOException, ConfigurationException {
+		
+		/*TEST*/
+		//File f = new File(configPrefix + configFilePath);
+		
+		String fullConfigFilePath = configPrefix + configFilePath;
+		String fullModelFilePath = modelPrefix + modelFilePath;
+		File configFile = new File(fullConfigFilePath);
+		File modelFile = new File(fullModelFilePath);
+		System.out.println("test path: " +  configFile.getAbsolutePath());
+		System.out.println("test path: " +  modelFile.getAbsolutePath());
+		
+	//	if (configFile.exists() && modelFile.exists()) {
+			System.out.println("Reading model from file: " + fullModelFilePath);
+			System.out.println("Reading config from file: "
+					+ fullConfigFilePath);
+			initializeModel(configFilePath,modelFilePath);
+		//} else {
+		//	System.err.println("File not found: " + configFile + "\nor: " + modelFile);
+		//}
+		
+	
 		/*
 		 * BANNER.logInput(dataset.getSentences(), config);
 		 * System.out.println("Completed input: " + (System.currentTimeMillis()
 		 * - start)); Performance performance = test(dataset, tagger, config);
 		 * performance.print();
 		 */
+	}
+	
+	public void initialize( URL configUrl,  String modelUrl){
+		String cp = System.getProperty("java.class.path");
+		System.out.println("classpath: " + cp);
+		//System.out.println(new File("."))
+		System.out.println("Reading model from system resource: "
+				+ modelUrl);
+		System.out.println("Reading config from system resource: "
+				+ configUrl.getFile());
+		try {
+			File configFile = new File("jar:" + configUrl.getFile());
+			File modelFile = new File(modelUrl);
+		   System.out.println(modelFile.getPath());
+			initializeModel(configFile.getName(),modelFile.getName());
+		} catch (ConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	public static void main(String[] args){
+		String question = "Does BRCA1 cause mad cow disease?";
+	//	List<String> questions = new ArrayList<String>();
+		//questions.add(question);
+		BANNERWrapper bw = new BANNERWrapper();
+		String configPath = "banner_AZDC.xml";
+		String modelPath = "model_AZDC.bin";
+		try {
+			bw.initialize(configPath, modelPath);
+		} catch (ConfigurationException e) {
+			System.err.println("configuration exception");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.err.println("io exception");			
+			e.printStackTrace();
+		}
+		System.out.println("Tag diseases:");
+		Map<String,String> diseasesAnnots = bw.getAnnotations(question);
+		for(String k : diseasesAnnots.keySet()){
+			String mentionText = k, type = diseasesAnnots.get(k);
+			System.out.println("keyterm: " + mentionText +  "type: " + type);
+		}
+		
+		
+		bw = new BANNERWrapper();
+		configPath = "banner_BC2GM.xml";
+		modelPath = "model_BC2GM.bin";
+		
+		try {
+			bw.initialize(configPath, modelPath);
+		} catch (ConfigurationException e) {
+			System.err.println("configuration exception");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.err.println("io exception");			
+			e.printStackTrace();
+		}
+		
+		
+		
+		System.out.println("Tag genes:");
+		
+		Map<String,String> geneAnnots = bw.getAnnotations(question);
+		for(String k : geneAnnots.keySet()){
+			String mentionText = k, type = geneAnnots.get(k);
+			System.out.println("keyterm: " + mentionText +  "type: " + type);
+		}
+		
+		
+		
+		
 	}
 
 	/*

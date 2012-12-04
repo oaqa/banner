@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
@@ -67,11 +68,11 @@ public class CRFTagger implements Tagger
 	 * @throws IOException
 	 * @return A new instance of the CRFTagger contained in the specified file
 	 */
-	public static CRFTagger load(File f, Lemmatiser lemmatiser, dragon.nlp.tool.Tagger posTagger, Tagger preTagger) throws IOException
+	public static CRFTagger load(InputStream f, Lemmatiser lemmatiser, dragon.nlp.tool.Tagger posTagger, Tagger preTagger) throws IOException
 	{
 		try
 		{
-			ObjectInputStream ois = new ObjectInputStream(new GZIPInputStream(new FileInputStream(f)));
+			ObjectInputStream ois = new ObjectInputStream(new GZIPInputStream(f));
 			CRF model = (CRF) ois.readObject();
 			// TODO Test this
 			FeatureSet featureSet = (FeatureSet) ois.readObject();

@@ -92,7 +92,7 @@ public class BANNERAnnotator extends JCasAnnotator_ImplBase {
 			HierarchicalConfiguration localConfig = config.configurationAt(BANNER.class.getPackage().getName());
 			String modelFilename = (String)aContext.getConfigParameterValue("modelFile");
 			System.out.println("Model: " + modelFilename);
-			tagger = CRFTagger.load(new File(modelFilename), lemmatiser, posTagger, dictionary);
+			tagger = CRFTagger.load(getClass().getResourceAsStream(modelFilename), lemmatiser, posTagger, dictionary);
 			System.out.println("Loaded model: " + (System.currentTimeMillis() - start)+"ms");
 		} catch (ConfigurationException e) {
 			e.printStackTrace();

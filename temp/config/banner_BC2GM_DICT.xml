@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<banner-configuration>
+  <banner>
+    <eval>
+      <datasetName>banner.eval.dataset.BC2GMDataset</datasetName>
+      <dataset>
+        <sentenceFilename>***PATH***/train.in</sentenceFilename>
+        <mentionTestFilename>***PATH***/GENE.eval</mentionTestFilename>
+        <mentionAlternateFilename>***PATH***/ALTGENE.eval</mentionAlternateFilename>
+      </dataset>
+      <idInputFilename>output/ids_DICT.txt</idInputFilename>
+      <rawInputFilename>output/raw_DICT.txt</rawInputFilename>
+      <trainingInputFilename>output/training_DICT.txt</trainingInputFilename>
+      <outputFilename>output/output_DICT.txt</outputFilename>
+      <mentionFilename>output/mention_DICT.txt</mentionFilename>
+      <inContextAnalysisFilename>output/contextAnalysis_DICT.html</inContextAnalysisFilename>
+      <tokenizer>banner.tokenization.SimpleTokenizer</tokenizer>
+      <useParenthesisPostProcessing>true</useParenthesisPostProcessing>
+      <useLocalAbbreviationPostProcessing>true</useLocalAbbreviationPostProcessing>
+      <tagFormat>IOB</tagFormat>
+      <dictionaryTagger>banner.tagging.dictionary.DictionaryTagger</dictionaryTagger>
+    </eval>
+    <tagging>
+      <dictionary>
+        <DictionaryTagger>
+          <filterContainedMentions>true</filterContainedMentions>
+          <normalizeMixedCase>false</normalizeMixedCase>
+          <normalizeDigits>false</normalizeDigits>
+          <canonize>false</canonize>
+          <generate2PartVariations>true</generate2PartVariations>
+          <dropEndParentheticals>false</dropEndParentheticals>
+          <dictionaryFile>/media/data/workspaces/school/BANNER2/dict/single.txt</dictionaryFile>
+          <dictionaryType>GENE</dictionaryType>
+        </DictionaryTagger>
+      </dictionary>
+    </tagging>
+  </banner>
+</banner-configuration>
