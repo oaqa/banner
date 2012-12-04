@@ -100,7 +100,7 @@ public class BANNERWrapper {
 		long start = System.currentTimeMillis();
 		System.out.println("modelFile: " + modelFile);
     System.out.println("configFile: " + configFile);
-		this.config = new XMLConfiguration(getFile(configFile));
+		this.config = new XMLConfiguration(getFile(configPrefix+ configFile));
 
 		// dataset = BANNER.getDataset(config);
 		tokenizer = BANNER.getTokenizer(config);
@@ -113,7 +113,7 @@ public class BANNERWrapper {
 		
 		try {
 			System.out.println(modelFile);
-			tagger = CRFTagger.load(getClass().getClassLoader().getResource(modelFile).openStream(), lemmatiser, posTagger,
+			tagger = CRFTagger.load(getClass().getClassLoader().getResource(modelPrefix +modelFile).openStream(), lemmatiser, posTagger,
 					dictionary);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -154,27 +154,27 @@ public class BANNERWrapper {
 		 * performance.print();
 		 */
 	}
-	
-	public void initialize( URL configUrl,  String modelUrl){
+	/*
+	public void initialize( String configUrl,  String modelUrl){
 		String cp = System.getProperty("java.class.path");
 		System.out.println("classpath: " + cp);
 		//System.out.println(new File("."))
 		System.out.println("Reading model from system resource: "
 				+ modelUrl);
 		System.out.println("Reading config from system resource: "
-				+ configUrl.getFile());
+				+ configUrl);
 		try {
-			File configFile = new File("jar:" + configUrl.getFile());
-			File modelFile = new File(modelUrl);
-		   System.out.println(modelFile.getPath());
-			initializeModel(configFile.getName(),modelFile.getName());
+		//	File configFile = new File("jar:" + configUrl.getFile());
+		//	File modelFile = new File(modelUrl);
+		 //  System.out.println(modelFile.getPath());
+			initializeModel(configUrl,modelUrl);
 		} catch (ConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		
-	}
+	}*/
 	
 	public static void main(String[] args){
 		String question = "Does BRCA1 cause mad cow disease?";
