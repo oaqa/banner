@@ -6,7 +6,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -23,6 +25,8 @@ import org.apache.commons.configuration.HierarchicalConfiguration;
 import org.apache.commons.configuration.XMLConfiguration;
 
 import banner.eval.dataset.Dataset;
+import banner.eval.uima.BANNERWrapper;
+import banner.eval.uima.Util;
 import banner.postprocessing.FlattenPostProcessor;
 import banner.postprocessing.LocalAbbreviationPostProcessor;
 import banner.postprocessing.ParenthesisPostProcessor;
@@ -1121,7 +1125,7 @@ public class BANNER {
 					"Must specify data directory for POS tagger");
 
 		if (posTagger.equals(HeppleTagger.class.getName()))
-			return new HeppleTagger(posTaggerDataDirectory);
+			return new HeppleTagger(new Util().getFile(posTaggerDataDirectory));
 		else if (posTagger.equals(MedPostTagger.class.getName()))
 			return new MedPostTagger(posTaggerDataDirectory);
 		else
@@ -1129,6 +1133,8 @@ public class BANNER {
 					+ posTagger);
 	}
 
+	
+	 
 	public static EngLemmatiser getLemmatiser(HierarchicalConfiguration config) {
 		HierarchicalConfiguration localConfig = config
 				.configurationAt(BANNER.class.getPackage().getName());

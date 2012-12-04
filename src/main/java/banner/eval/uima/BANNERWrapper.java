@@ -92,11 +92,14 @@ public class BANNERWrapper {
 	
 	 public String getFile(String path){
 	    URL url = getClass().getClassLoader().getResource(path);
+	    System.out.println("URL:" + url.getFile()); 
 	    return url.getFile();
 	  }
 	
 	public void initializeModel(String configFile, String modelFile) throws ConfigurationException{
 		long start = System.currentTimeMillis();
+		System.out.println("modelFile: " + modelFile);
+    System.out.println("configFile: " + configFile);
 		this.config = new XMLConfiguration(getFile(configFile));
 
 		// dataset = BANNER.getDataset(config);
@@ -178,8 +181,8 @@ public class BANNERWrapper {
 	//	List<String> questions = new ArrayList<String>();
 		//questions.add(question);
 		BANNERWrapper bw = new BANNERWrapper();
-		String configPath = "banner_AZDC.xml";
-		String modelPath = "model_AZDC.bin";
+		String configPath = "config/banner_AZDC.xml";
+		String modelPath = "output/model_AZDC.bin";
 		try {
 			bw.initialize(configPath, modelPath);
 		} catch (ConfigurationException e) {
@@ -198,8 +201,8 @@ public class BANNERWrapper {
 		
 		
 		bw = new BANNERWrapper();
-		configPath = "banner_BC2GM.xml";
-		modelPath = "model_BC2GM.bin";
+		configPath = "config/banner_BC2GM.xml";
+		modelPath = "output/model_BC2GM.bin";
 		
 		try {
 			bw.initialize(configPath, modelPath);
