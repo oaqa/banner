@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>edu.asu.banner</groupId>
 	<artifactId>banner</artifactId>
-	<version>0.0.4
+	<version>0.0.5-SNAPSHOT
 	</version>
 	<name>banner</name>
 	<description>Banner gene tagging tool</description>
