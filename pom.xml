@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>edu.asu.banner</groupId>
 	<artifactId>banner</artifactId>
-	<version>0.0.4
+	<version>0.0.4-SNAPSHOT
 	</version>
 	<name>banner</name>
 	<description>Banner gene tagging tool</description>
@@ -13,8 +13,8 @@
 		</repository>
 	</repositories>
 	<scm>
-<connection>scm:git:git@github.com:oaqa/nlp-tools.git</connection>
-<developerConnection>scm:git:git@github.com:oaqa/nlp-tools.git</developerConnection>
+<connection>scm:git:git@github.com:oaqa/banner.git</connection>
+<developerConnection>scm:git:git@github.com:oaqa/banner.git</developerConnection>
 </scm>
 
  <properties>
