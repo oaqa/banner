@@ -2,19 +2,23 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>edu.asu.banner</groupId>
 	<artifactId>banner</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
-	<name>Banner</name>
+	<version>0.0.5-SNAPSHOT</version>
+	<name>banner</name>
 	<description>Banner gene tagging tool</description>
 	<repositories>
 		<repository>
 			<id>oaqa</id>
-			<url>http://mu.lti.cs.cmu.edu:8081/nexus/content/repositories/course-dependencies</url>
+			<url>http://mu.lti.cs.cmu.edu:8081/nexus/content/repositories/releases</url>
 		</repository>
 	</repositories>
 	<scm>
-<connection>scm:git:git@github.com:oaqa/banner.git</connection>
-<developerConnection>scm:git:git@github.com:oaqa/banner.git</developerConnection>
+<connection>scm:git:git@github.com:oaqa/nlp-tools.git</connection>
+<developerConnection>scm:git:git@github.com:oaqa/nlp-tools.git</developerConnection>
 </scm>
+
+ <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
@@ -37,7 +41,7 @@
 							<goal>perform</goal>
 						</goals>
 						<configuration>
-							<pomFileName>banner/pom.xml</pomFileName>
+						<!--	<pomFileName>banner/pom.xml</pomFileName> -->
 						</configuration>
 					</execution>
 				</executions>
