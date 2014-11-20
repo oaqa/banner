@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>edu.asu.banner</groupId>
 	<artifactId>banner</artifactId>
-	<version>0.0.7-SNAPSHOT</version>
+	<version>0.0.7</version>
 	<name>banner</name>
 	<description>Banner gene tagging tool</description>
 	<repositories>
@@ -14,7 +14,8 @@
 <scm>
 <connection>scm:git:git@github.com:oaqa/banner.git</connection>
 <developerConnection>scm:git:git@github.com:oaqa/banner.git</developerConnection>
-</scm>
+  <tag>banner-0.0.7</tag>
+  </scm>
 
  <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
